@@ -5,17 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Our Wedding</title>
+    link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">D & H</a> <ul class="nav-links">
+            <a href="#" class="logo">D & H</a>
+
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div> 
+            
+            <ul class="nav-links">
                 <li><a href="#">Trang chủ</a></li>
                 <li><a href="#event-details">Thông tin</a></li>
                 <li><a href="#gallery">Thư viện ảnh</a></li>
             </ul>
         </div>
     </nav>
+    
     <div class="hero-section">
         <div class="content">
             <h1>Đặng Vũ Đức & Hoàng Lan Hương</h1>
@@ -29,6 +41,7 @@
             <p>Bắt đầu từ một buổi chiều thu tháng 10, trải qua bao nhiêu kỷ niệm buồn vui...</p>
             </div>
     </section>
+
     <section id="event-details" class="section-block bg-light">
         <div class="container">
             <h2>Thời gian & Địa điểm</h2>
@@ -46,6 +59,7 @@
             </div>
         </div>
     </section>
+
     <section id="gallery" class="section-block">
         <div class="container">
             <h2>Thư viện ảnh của chúng mình</h2>
@@ -59,6 +73,7 @@
             </div>
         </div>
     </section>
+
     <div id="rsvpModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -67,10 +82,13 @@
             <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfpopMSSmYpHdvN8laTiNyEOR1iVNJXfe5JPqPixdZxGtIbsA/viewform?usp=dialog" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0">Đang tải…</iframe>
         </div>
     </div>
+
     <div id="imageLightbox" class="lightbox">
         <span class="close-lightbox">&times;</span>
         <img class="lightbox-content" id="lightbox-img">
     </div>
+
     <script src="script.js"></script>
+
 </body>
 </html>
