@@ -26,7 +26,7 @@
     margin-top: 20px;
     padding: 15px 30px;
     font-size: 18px;
-    background-color: #ff7e67; /* Màu cam đào, bạn có thể đổi */
+    background-color: #86b2b1;
     color: white;
     border: none;
     border-radius: 25px;
@@ -35,7 +35,7 @@
 }
 
 .register-btn:hover {
-    background-color: #e56a55;
+    background-color: #6a9a99;
 }
 
 /* Giao diện của Popup (Mặc định ẩn) */
@@ -127,7 +127,7 @@
 }
 
 .detail-card h3 {
-    color: #ff7e67;
+    color: #86b2b1;
     margin-bottom: 15px;
     font-size: 24px;
 }
@@ -148,9 +148,11 @@ html {
     left: 0;
     width: 100%;
     z-index: 100;
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    /* Dùng mã RGB của #86b2b1 với độ trong suốt 85% */
+    background: rgba(134, 178, 177, 0.85); 
+    /* Tăng độ mờ lên 15px để làm nền phía sau nhòe hẳn đi, tôn chữ lên */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     outline: none;
 }
 
@@ -182,9 +184,9 @@ html {
 .bar {
     width: 25px;
     height: 3px;
-    background-color: #333;
+    background-color: #fff; 
     margin: 4px 0;
-    transition: all 0.3s ease; /* Hiệu ứng mượt mà khi đổi màu hoặc xoay */
+    transition: all 0.3s ease;
 }
 
 /* --- TỐI ƯU CHO GIAO DIỆN MOBILE (Chỉ chạy khi màn hình nhỏ hơn 768px) --- */
@@ -201,20 +203,20 @@ html {
         left: 0;
         width: 100%;
         
-        background: rgba(255, 255, 255, 0.4); 
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        /* Tăng nền trắng lên 75% và độ mờ lên 20px để dễ đọc chữ hơn */
+        background: rgba(255, 255, 255, 0.75); 
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         
         flex-direction: column;
         align-items: center;
         padding: 20px 0;
         box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         
-        /* CÁCH MỚI ĐỂ TẠO HIỆU ỨNG TRƯỢT MÀ KHÔNG LÀM HỎNG BLUR */
-        opacity: 1; /* Ẩn đi */
-        visibility: hidden; /* Xóa khỏi luồng tương tác để không bấm nhầm */
-        margin-top: -15px; /* Kéo nhẹ menu lên trên 15px */
-        transition: all 0.4s ease; /* Chuyển động mượt mà trong 0.4s */
+        opacity: 0; 
+        visibility: hidden; 
+        margin-top: -15px; 
+        transition: all 0.4s ease; 
     }
 
     /* Khi được gắn class active qua JavaScript */
@@ -263,6 +265,13 @@ html {
     font-family: 'Georgia', serif;
 }
 
+.logo, .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
 .nav-links {
     list-style: none; /* Xóa dấu chấm đầu dòng mặc định của thẻ li */
     display: flex;
@@ -284,7 +293,7 @@ html {
 }
 
 .nav-links a:hover {
-    color: #ff7e67; /* Đổi màu khi đưa chuột vào */
+    color: #c4dfde; 
 }
 
 /* --- Thiết kế khung chứa ảnh (Gallery) --- */
