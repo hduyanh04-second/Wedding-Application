@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Phần hiển thị ảnh chính */
+.hero-section {
+    height: 100vh; /* Cao bằng 100% màn hình hiển thị */
+    /* Thay url thành đường dẫn ảnh thực tế của cặp đôi */
+    background-image: url('duong-dan-anh-cua-ban.jpg'); 
+    background-size: cover; /* Phủ kín khung hình */
+    background-position: center; /* Canh giữa ảnh */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Đẩy nội dung xuống phần dưới cùng */
+    padding-bottom: 10vh; /* Cách mép dưới một chút */
+}
+
+.content {
+    text-align: center;
+    color: white; /* Đổi màu chữ tùy thuộc vào độ tối của ảnh nền */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Tạo bóng để dễ đọc chữ trên nền ảnh */
+}
+
+.register-btn {
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #ff7e67; /* Màu cam đào, bạn có thể đổi */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-btn:hover {
+    background-color: #e56a55;
+}
+
+/* Giao diện của Popup (Mặc định ẩn) */
+.modal {
+    display: none; /* Ẩn đi khi mới load trang */
+    position: fixed; /* Ghim cố định trên màn hình */
+    z-index: 10; /* Đảm bảo nổi lên trên tất cả các thành phần khác */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Nền đen mờ */
+}
+
+/* Hộp nội dung chứa Form */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* Canh giữa theo chiều dọc và ngang */
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px; /* Độ rộng tối đa của form */
+    position: relative;
+}
+
+/* Nút X để đóng Popup */
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: black;
+}
