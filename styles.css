@@ -133,3 +133,158 @@
     font-weight: bold;
     margin-bottom: 10px;
 }
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* --- Thiết kế thanh Navigation Kính Mờ --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0; /* Đảm bảo thanh nav bám sát mép trái, triệt tiêu viền xám thừa */
+    width: 100%;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    outline: none; /* Xóa viền mặc định của trình duyệt */
+}
+
+.nav-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; /* Đẩy Logo sang trái, Menu sang phải */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    padding: 15px 20px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    font-family: 'Georgia', serif;
+}
+
+.nav-links {
+    list-style: none; /* Xóa dấu chấm đầu dòng mặc định của thẻ li */
+    display: flex;
+    gap: 30px; /* Tạo khoảng cách đều đặn giữa các nút bấm */
+}
+
+.nav-links a {
+    text-decoration: none; /* Xóa gạch chân của đường link */
+    color: #333;
+    font-weight: 500;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+/* Xóa hiệu ứng highlight mặc định khi click/hover trên trình duyệt cũ */
+.nav-links a, .logo {
+    outline: none;
+    -webkit-tap-highlight-color: transparent; 
+}
+
+.nav-links a:hover {
+    color: #ff7e67; /* Đổi màu khi đưa chuột vào */
+}
+
+/* --- Thiết kế khung chứa ảnh (Gallery) --- */
+.gallery-grid {
+    display: grid;
+    /* Tự động chia cột: mỗi cột tối thiểu 250px, nếu màn hình rộng sẽ tự chia đều thêm cột */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 15px; /* Khoảng cách giữa các bức ảnh */
+    margin-top: 40px;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 300px; /* Ép tất cả ảnh về chung một độ cao để layout không bị xô lệch */
+    object-fit: cover; /* Thuộc tính cực kỳ quan trọng: tự động cắt cúp phần thừa để ảnh vừa khít khung mà không bị méo tỉ lệ */
+    border-radius: 8px; /* Bo góc nhẹ cho ảnh */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.4s ease; /* Thời gian chuyển động khi hover */
+    cursor: pointer;
+}
+
+/* Hiệu ứng phóng to nhẹ khi người dùng xem ảnh */
+.gallery-img:hover {
+    transform: scale(1.03); 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* --- Tạo ảnh nền mờ cho Hero Section --- */
+.hero-section {
+    position: relative; /* Đặt làm gốc tọa độ cho lớp ảnh mờ bên trong */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 10vh;
+    overflow: hidden; /* Ngăn phần viền bị mờ tràn ra ngoài khung */
+}
+
+/* Kỹ thuật ::before để tách riêng lớp ảnh và lớp chữ */
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: -10px; left: -10px; right: -10px; bottom: -10px; /* Mở rộng ảnh ra một chút để viền mờ không bị lộ viền trắng */
+    /* Link ảnh mẫu chất lượng cao */
+    background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2000&auto=format&fit=crop'); 
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px); /* Chỉnh độ mờ tại đây (số càng to càng mờ) */
+    z-index: -1; /* Đẩy lớp ảnh này lùi về phía sau cùng */
+}
+
+/* --- Giao diện Lightbox --- */
+.lightbox {
+    display: none; /* Ẩn mặc định */
+    position: fixed;
+    z-index: 999; /* Đảm bảo nó nổi lên trên cả thanh Nav và Form */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Nền đen gần như đặc */
+}
+
+.lightbox-content {
+    display: block;
+    margin: auto;
+    max-width: 90%;
+    max-height: 90vh; /* Ảnh sẽ không cao quá 90% chiều cao màn hình */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Kỹ thuật canh giữa tuyệt đối theo 2 trục X Y */
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); /* Viền sáng nhẹ quanh ảnh */
+    animation: zoomIn 0.3s ease; /* Hiệu ứng zoom nhẹ khi mở lên */
+}
+
+/* Định nghĩa hiệu ứng phóng to */
+@keyframes zoomIn {
+    from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+    to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-lightbox:hover {
+    color: #ff7e67;
+}

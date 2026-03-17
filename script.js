@@ -19,3 +19,31 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
+// --- Xử lý sự kiện Lightbox cho Thư viện ảnh ---
+
+const lightbox = document.getElementById("imageLightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const images = document.querySelectorAll(".gallery-img"); // Lấy toàn bộ các ảnh có class là gallery-img
+const closeLightbox = document.querySelector(".close-lightbox");
+
+// Duyệt qua từng bức ảnh trong thư viện
+images.forEach(img => {
+    // Khi click vào một bức ảnh bất kỳ
+    img.onclick = function() {
+        lightbox.style.display = "block"; // Hiện khung đen
+        lightboxImg.src = this.src; // Lấy đường dẫn (src) của ảnh nhỏ, gán cho ảnh to
+    }
+});
+
+// Khi bấm vào dấu X thì đóng Lightbox
+closeLightbox.onclick = function() {
+    lightbox.style.display = "none";
+}
+
+// Bấm ra ngoài vùng ảnh (vào nền đen) cũng sẽ đóng Lightbox
+lightbox.onclick = function(event) {
+    if (event.target !== lightboxImg) {
+        lightbox.style.display = "none";
+    }
+}
