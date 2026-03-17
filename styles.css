@@ -203,15 +203,15 @@ html {
         left: 0;
         width: 100%;
         
-        /* Tăng nền trắng lên 75% và độ mờ lên 20px để dễ đọc chữ hơn */
-        background: rgba(255, 255, 255, 0.75); 
+        /* Độ trong suốt 95% giúp menu gần như đặc lại, kết hợp blur 20px */
+        background: rgba(134, 178, 177, 0.95); 
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         
         flex-direction: column;
         align-items: center;
         padding: 20px 0;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         
         opacity: 0; 
         visibility: hidden; 
@@ -244,6 +244,68 @@ html {
         padding: 50px 15px; 
     }
 }
+
+/* --- THIẾT KẾ FOOTER --- */
+.bg-color {
+    background-color: #86b2b1; /* Tông màu chính */
+    color: white; /* Chữ trắng */
+    padding: 60px 0 20px 0;
+    text-align: center;
+}
+
+/* Biến thẻ row thành một Flex container */
+.footer-widget-area .row {
+    display: flex;
+    flex-wrap: wrap; /* Cho phép rớt dòng nếu màn hình nhỏ */
+    justify-content: space-between; /* Đẩy 3 cột cách đều nhau */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    gap: 30px;
+}
+
+/* Class col-md-4 chiếm khoảng 33% chiều rộng màn hình */
+.col-md-4 {
+    flex: 1;
+    min-width: 250px; /* Chặn không cho cột bị bóp méo quá nhỏ trên điện thoại */
+}
+
+/* Định dạng tên cô dâu chú rể dùng font viết tay */
+.footer-logo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 42px;
+    line-height: 1;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.footer-logo small {
+    font-size: 28px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Chữ & dùng font thường cho rõ */
+}
+
+.footer-info {
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+/* Định dạng đường kẻ ngang và phần Copyright */
+.copyright {
+    margin-top: 50px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3); /* Đường kẻ mờ ngăn cách */
+    padding-top: 20px;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+/* Căn lề trái/phải cho 2 cột 2 bên khi hiển thị trên máy tính */
+@media (min-width: 769px) {
+    .footer-info.left {
+        text-align: right; /* Đẩy chữ cột trái sát vào logo ở giữa */
+    }
+    .footer-info.right {
+        text-align: left; /* Đẩy chữ cột phải sát vào logo ở giữa */
+    }
+}
+
+
 .section-block {
     background: radial-gradient(circle,rgba(255, 255, 255, 1) 0%, rgba(59, 59, 59, 0.14) 100%);
 }
@@ -389,5 +451,5 @@ html {
 }
 
 .close-lightbox:hover {
-    color: #ff7e67;
+    color: #86b2b1;
 }
