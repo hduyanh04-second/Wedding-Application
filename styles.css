@@ -8,8 +8,6 @@
 /* Phần hiển thị ảnh chính */
 .hero-section {
     height: 100vh; /* Cao bằng 100% màn hình hiển thị */
-    /* Thay url thành đường dẫn ảnh thực tế của cặp đôi */
-    background-image: url('duong-dan-anh-cua-ban.jpg'); 
     background-size: cover; /* Phủ kín khung hình */
     background-position: center; /* Canh giữa ảnh */
     display: flex;
@@ -44,12 +42,17 @@
 .modal {
     display: none; /* Ẩn đi khi mới load trang */
     position: fixed; /* Ghim cố định trên màn hình */
-    z-index: 10; /* Đảm bảo nổi lên trên tất cả các thành phần khác */
+    z-index: 1000; /* Đảm bảo nổi lên trên tất cả các thành phần khác */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6); /* Nền đen mờ */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* Hộp nội dung chứa Form */
@@ -148,9 +151,101 @@ html {
     background: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     outline: none;
 }
+
+
+
+.content h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 64px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6); /* Đổ bóng đậm hơn một chút để chữ tách hẳn khỏi nền */
+    line-height: 1.2;
+}
+
+.content p {
+    font-size: 20px;
+    letter-spacing: 3px; /* Kéo giãn khoảng cách các chữ cái cho thanh lịch */
+    margin-bottom: 20px;
+}
+
+/* --- Thiết kế Nút Menu 3 Gạch (Ẩn trên máy tính) --- */
+.menu-toggle {
+    display: none; /* Mặc định ẩn trên màn hình lớn */
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 101; /* Đảm bảo nút luôn nổi lên trên cùng */
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 4px 0;
+    transition: all 0.3s ease; /* Hiệu ứng mượt mà khi đổi màu hoặc xoay */
+}
+
+/* --- TỐI ƯU CHO GIAO DIỆN MOBILE (Chỉ chạy khi màn hình nhỏ hơn 768px) --- */
+@media (max-width: 768px) {
+    /* Hiển thị nút 3 gạch */
+    .menu-toggle {
+        display: flex; 
+    }
+
+    /* Định dạng lại thanh menu ngang thành dọc */
+    .nav-links {
+        position: absolute;
+        top: 100%; 
+        left: 0;
+        width: 100%;
+        
+        background: rgba(255, 255, 255, 0.4); 
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        
+        /* CÁCH MỚI ĐỂ TẠO HIỆU ỨNG TRƯỢT MÀ KHÔNG LÀM HỎNG BLUR */
+        opacity: 1; /* Ẩn đi */
+        visibility: hidden; /* Xóa khỏi luồng tương tác để không bấm nhầm */
+        margin-top: -15px; /* Kéo nhẹ menu lên trên 15px */
+        transition: all 0.4s ease; /* Chuyển động mượt mà trong 0.4s */
+    }
+
+    /* Khi được gắn class active qua JavaScript */
+    .nav-links.active {
+        opacity: 1; /* Hiện rõ lên */
+        visibility: visible; /* Cho phép tương tác */
+        margin-top: 0; /* Trượt 15px xuống vị trí chuẩn ban đầu */
+    }
+
+    .nav-links li {
+        margin: 15px 0; /* Tạo khoảng cách giữa các nút bấm cho dễ chạm bằng ngón tay */
+    }
+
+    /* Thu nhỏ chữ ở màn hình điện thoại tránh bị vỡ khung */
+    .content h1 {
+        font-size: 42px; 
+    }
+    
+    .content p {
+        font-size: 14px;
+    }
+
+    /* Giảm padding các phần nội dung để tiết kiệm không gian trên mobile */
+    .section-block {
+        padding: 50px 15px; 
+    }
+}
+.section-block {
+    background: radial-gradient(circle,rgba(255, 255, 255, 1) 0%, rgba(59, 59, 59, 0.14) 100%);
+}
+
 
 .nav-container {
     width: 100%;

@@ -47,3 +47,20 @@ lightbox.onclick = function(event) {
         lightbox.style.display = "none";
     }
 }
+
+// --- XỬ LÝ MENU MOBILE ---
+const mobileMenu = document.getElementById('mobile-menu');
+const navLinks = document.querySelector('.nav-links');
+const navItems = document.querySelectorAll('.nav-links li a');
+
+// Khi bấm vào nút 3 gạch, bật/tắt class 'active' cho menu
+mobileMenu.addEventListener('click', function() {
+    navLinks.classList.toggle('active');
+});
+
+// Trải nghiệm người dùng: Khi đang ở Mobile, bấm vào một link bất kỳ thì menu phải tự động đóng lại
+navItems.forEach(item => {
+    item.addEventListener('click', function() {
+        navLinks.classList.remove('active');
+    });
+});
