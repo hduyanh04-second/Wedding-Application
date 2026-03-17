@@ -75,3 +75,61 @@
 .close-btn:hover {
     color: black;
 }
+
+.section-block {
+    padding: 80px 20px; /* Cách không gian trên/dưới 80px để trang web có độ "thở", cách hai bên 20px */
+    text-align: center;
+}
+
+/* Đổi màu nền xen kẽ giúp phân tách các phần rõ ràng hơn */
+.bg-light {
+    background-color: #fcfcfc; 
+}
+
+/* Giới hạn nội dung ở giữa màn hình */
+.container {
+    max-width: 1000px; /* Không để chữ chạy dài vô tận trên màn hình máy tính to */
+    margin: 0 auto; /* Thuộc tính này ép khối div tự động căn giữa trang */
+}
+
+.section-block h2 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+    font-family: 'Georgia', serif; /* Dùng font có chân (serif) cho tiêu đề để tạo sự lãng mạn, trang trọng */
+}
+
+/* --- Dàn trang phần Thông tin sự kiện --- */
+.details-grid {
+    display: grid;
+    /*Nếu màn hình đủ rộng (> 300px), chúng sẽ dàn hàng ngang chia đều diện tích (1fr). */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 40px; /* Khoảng cách giữa các thẻ sự kiện */
+    margin-top: 40px;
+}
+
+.detail-card {
+    background: white;
+    padding: 40px 20px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Tạo bóng đổ nhẹ, mờ giúp thẻ nổi khối lên 3D */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Thêm hiệu ứng chuyển động mượt mà trong 0.3s */
+}
+
+/* Hiệu ứng khi người dùng di chuột (hover) vào thẻ */
+.detail-card:hover {
+    transform: translateY(-10px); /* Kéo thẻ bay lên trên 10 pixel */
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1); /* Bóng đổ đậm hơn khi bay lên */
+}
+
+.detail-card h3 {
+    color: #ff7e67;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.detail-card .date {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
