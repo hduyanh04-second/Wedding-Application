@@ -8,16 +8,16 @@
 
 /* Phần hiển thị ảnh chính */
 /* --- Tạo ảnh nền mờ cho Hero Section --- */
+/* Phần hiển thị ảnh chính */
 .hero-section {
-    height: 100vh; /* Cao bằng 100% màn hình hiển thị */
-    background-size: cover; /* Phủ kín khung hình */
-    background-position: center; /* Canh giữa ảnh */
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
     display: flex;
     justify-content: center;
-    align-items: flex-end; /* Đẩy nội dung xuống phần dưới cùng */
-    padding-bottom: 10vh; /* Cách mép dưới một chút */
-    position: relative; /* Đặt làm gốc tọa độ cho lớp ảnh mờ bên trong */
-    overflow: hidden; /* Ngăn phần viền bị mờ tràn ra ngoài khung */
+    align-items: center; /* Đổi từ flex-end thành center để căn giữa theo chiều dọc */
+    position: relative;
+    overflow: hidden;
 }
 
 /* Kỹ thuật ::before để tách riêng lớp ảnh và lớp chữ */
@@ -175,12 +175,19 @@ html {
     left: 0;
     width: 100%;
     z-index: 100;
-    /* Dùng mã RGB của #86b2b1 với độ trong suốt 85% */
-    background: rgba(134, 178, 177, 0.85); 
-    /* Tăng độ mờ lên 15px để làm nền phía sau nhòe hẳn đi, tôn chữ lên */
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    background: transparent; /* Mặc định trong suốt hoàn toàn */
+    backdrop-filter: none; /* Không làm mờ khi ở trên cùng */
+    -webkit-backdrop-filter: none;
+    transition: all 0.4s ease; /* Chuyển động mượt mà khi đổi màu */
     outline: none;
+}
+
+/* Class này sẽ được JS tự động gán vào khi người dùng cuộn chuột */
+.navbar.scrolled {
+    background: rgba(134, 178, 177, 0.85); /* Hiện lại màu xanh */
+    backdrop-filter: blur(15px); /* Hiện lại hiệu ứng kính mờ */
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Thêm bóng đổ nhẹ để nổi bật khỏi nền */
 }
 
 .content p {
@@ -207,46 +214,69 @@ html {
 
 /* --- TỐI ƯU CHO GIAO DIỆN MOBILE (Chỉ chạy khi màn hình nhỏ hơn 768px) --- */
 @media (max-width: 768px) {
-    /* Hiển thị nút 3 gạch */
-    .menu-toggle {
-        display: flex; 
+    /* 1. Khóa thanh cuộn ngang để trang không bị vỡ khi đẩy */
+    html, body {
+        overflow-x: hidden; 
     }
 
-    /* Định dạng lại thanh menu ngang thành dọc */
+    /* 2. Áp dụng hiệu ứng trượt cho các khối nội dung (thay vì thẻ body) */
+    .navbar, .hero-section, .section-block, footer {
+        transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* 3. Khi ấn nút 3 gạch, đẩy tất cả nội dung sang trái 66% */
+    body.push-active .navbar,
+    body.push-active .hero-section,
+    body.push-active .section-block,
+    body.push-active footer {
+        transform: translateX(-66vw);
+    }
+
+    .menu-toggle {
+        display: flex; 
+        z-index: 105; 
+    }
+
+    /* 4. Đặt NavMenu nằm chờ sẵn ở mép ngoài cùng bên phải của thanh Navbar */
     .nav-links {
-        position: absolute;
-        top: 100%; 
-        left: 0;
-        width: 100%;
+        position: absolute; 
+        top: 0;
+        left: 100%; /* Đặt chính xác ở rìa bên phải, nằm ngoài màn hình hiển thị */
+        width: 66vw; 
+        height: 100vh;
         
-        /* Độ trong suốt 95% giúp menu gần như đặc lại, kết hợp blur 20px */
         background: rgba(134, 178, 177, 0.95); 
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         
+        /* Luôn hiển thị, vì nó đã được giấu ở left: 100% rồi */
+        display: flex; 
         flex-direction: column;
+        justify-content: flex-start; 
         align-items: center;
-        padding: 20px 0;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        padding-top: 100px;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.15);
         
-        opacity: 0; 
-        visibility: hidden; 
-        margin-top: -15px; 
-        transition: all 0.4s ease; 
-    }
-
-    /* Khi được gắn class active qua JavaScript */
-    .nav-links.active {
-        opacity: 1; /* Hiện rõ lên */
-        visibility: visible; /* Cho phép tương tác */
-        margin-top: 0; /* Trượt 15px xuống vị trí chuẩn ban đầu */
+        /* Hủy các hiệu ứng ẩn cũ, giờ nó sẽ tự động trượt vào cùng thanh Navbar */
+        opacity: 1; 
+        visibility: visible; 
+        margin-top: 0; 
+        transition: none; 
     }
 
     .nav-links li {
-        margin: 15px 0; /* Tạo khoảng cách giữa các nút bấm cho dễ chạm bằng ngón tay */
+        margin: 20px 0;
+        width: 100%;
+        text-align: center;
     }
 
-    /* Thu nhỏ chữ ở màn hình điện thoại tránh bị vỡ khung */
+    .nav-links a {
+        font-size: 20px; 
+        display: block; 
+        color: #fff; /* Đảm bảo chữ trắng nổi bật trên nền xanh */
+    }
+
+    /* --- Thu nhỏ nội dung Hero Section để vừa màn hình điện thoại --- */
     .content h1 {
         font-size: 42px; 
     }
@@ -255,12 +285,10 @@ html {
         font-size: 14px;
     }
 
-    /* Giảm padding các phần nội dung để tiết kiệm không gian trên mobile */
     .section-block {
         padding: 50px 15px; 
     }
 }
-
 /* --- THIẾT KẾ FOOTER --- */
 .bg-color {
     background-color: #86b2b1; /* Tông màu chính */
@@ -389,29 +417,55 @@ html {
     color: #c4dfde; 
 }
 
-/* --- Thiết kế khung chứa ảnh (Gallery) --- */
+/* --- Thiết kế khung chứa ảnh (Gallery Lướt Ngang - Drag to Scroll) --- */
 .gallery-grid {
-    display: grid;
-    /* Tự động chia cột: mỗi cột tối thiểu 250px, nếu màn hình rộng sẽ tự chia đều thêm cột */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-    gap: 15px; /* Khoảng cách giữa các bức ảnh */
+    display: flex; /* Giữ nguyên Flexbox để xếp hàng ngang */
+    overflow-x: auto; /* Giữ nguyên overflow-x để hỗ trợ vuốt trên mobile */
+    gap: 1px; /* Khoảng cách 1 pixel */
     margin-top: 40px;
+    padding-bottom: 5px; /* Giảm padding vì không còn thanh cuộn */
+    
+    /* Cốt lõi: Thay đổi con trỏ chuột sang hình bàn tay để kéo */
+    cursor: grab; 
+    
+    /* Cốt lõi: Ẩn thanh cuộn mặc định trên các trình duyệt khác nhau */
+    -ms-overflow-style: none;  /* Ẩn trên Internet Explorer và Edge cũ */
+    scrollbar-width: none;  /* Ẩn trên Firefox */
+    
+    /* Cực kỳ quan trọng: Ngăn chặn việc người dùng bôi đen văn bản hoặc ảnh khi đang kéo */
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Ẩn thanh cuộn cho các trình duyệt Webkit (Chrome, Safari, Edge mới) */
+.gallery-grid::-webkit-scrollbar {
+    display: none;
+}
+
+/* Khi người dùng đang giữ chuột và kéo, đổi con trỏ sang hình nắm chặt */
+.gallery-grid.active-dragging {
+    cursor: grabbing;
 }
 
 .gallery-img {
-    width: 100%;
-    height: 300px; /* Ép tất cả ảnh về chung một độ cao để layout không bị xô lệch */
-    object-fit: cover; /* Thuộc tính cực kỳ quan trọng: tự động cắt cúp phần thừa để ảnh vừa khít khung mà không bị méo tỉ lệ */
-    border-radius: 8px; /* Bo góc nhẹ cho ảnh */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: transform 0.4s ease; /* Thời gian chuyển động khi hover */
+    flex: 0 0 auto; /* Cực kỳ quan trọng: Ép ảnh không bị bóp nhỏ lại khi thiếu chỗ */
+    width: 300px; /* Chiều rộng cố định */
+    height: 300px; /* Chiều cao bằng chiều rộng để thành Khối Vuông */
+    object-fit: cover;
+    border-radius: 0; /* Xóa bo góc để các khối ảnh ghép sát nhau hoàn hảo */
+    box-shadow: none; /* Xóa bóng đổ vì layout sát nhau không cần bóng */
+    transition: filter 0.3s ease;
     cursor: pointer;
 }
 
-/* Hiệu ứng phóng to nhẹ khi người dùng xem ảnh */
-.gallery-img:hover {
-    transform: scale(1.03); 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+.gallery-img {
+    flex: 0 0 auto;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 0;
+    transition: filter 0.3s ease;
+    cursor: pointer; /* Khi di chuột vào từng ảnh thì vẫn hiện hình bàn tay chỉ trỏ để biết là bấm được */
 }
 
 /* --- Giao diện Lightbox --- */
