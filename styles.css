@@ -2,10 +2,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Áp dụng Nunito làm phông chữ nền tảng cho mọi nơi */
+    font-family: 'Nunito', sans-serif; 
 }
 
 /* Phần hiển thị ảnh chính */
+/* --- Tạo ảnh nền mờ cho Hero Section --- */
 .hero-section {
     height: 100vh; /* Cao bằng 100% màn hình hiển thị */
     background-size: cover; /* Phủ kín khung hình */
@@ -14,6 +16,21 @@
     justify-content: center;
     align-items: flex-end; /* Đẩy nội dung xuống phần dưới cùng */
     padding-bottom: 10vh; /* Cách mép dưới một chút */
+    position: relative; /* Đặt làm gốc tọa độ cho lớp ảnh mờ bên trong */
+    overflow: hidden; /* Ngăn phần viền bị mờ tràn ra ngoài khung */
+}
+
+/* Kỹ thuật ::before để tách riêng lớp ảnh và lớp chữ */
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: -10px; left: -10px; right: -10px; bottom: -10px; /* Mở rộng ảnh ra một chút để viền mờ không bị lộ viền trắng */
+    /* Link ảnh mẫu chất lượng cao */
+    background-image: url('assets/anh2.jpg'); 
+    background-size: cover;
+    background-position: center;
+    filter: blur(1.5px); /* Chỉnh độ mờ tại đây (số càng to càng mờ) */
+    z-index: -1; /* Đẩy lớp ảnh này lùi về phía sau cùng */
 }
 
 .content {
@@ -22,10 +39,20 @@
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Tạo bóng để dễ đọc chữ trên nền ảnh */
 }
 
+.content h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 64px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6); /* Đổ bóng đậm hơn một chút để chữ tách hẳn khỏi nền */
+    line-height: 1.2;
+}
+
 .register-btn {
     margin-top: 20px;
     padding: 15px 30px;
     font-size: 18px;
+    font-weight: 700;
     background-color: #86b2b1;
     color: white;
     border: none;
@@ -154,17 +181,6 @@ html {
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     outline: none;
-}
-
-
-
-.content h1 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 64px;
-    margin-bottom: 10px;
-    color: #fff;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.6); /* Đổ bóng đậm hơn một chút để chữ tách hẳn khỏi nền */
-    line-height: 1.2;
 }
 
 .content p {
@@ -319,6 +335,21 @@ html {
     padding: 15px 50px;
 }
 
+.logo,
+.section-block h2,
+.content p {
+    font-family: 'Cardo', sans-serif;
+}
+
+.event-details, .container h2 {
+    font-family: 'Times New Roman', sans-serif;
+}
+
+.detail-card h3 {
+    font-family: 'Times New Roman', sans-serif;
+    font-weight: 550;
+}
+
 .logo {
     font-size: 28px;
     font-weight: bold;
@@ -381,30 +412,6 @@ html {
 .gallery-img:hover {
     transform: scale(1.03); 
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-
-/* --- Tạo ảnh nền mờ cho Hero Section --- */
-.hero-section {
-    position: relative; /* Đặt làm gốc tọa độ cho lớp ảnh mờ bên trong */
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    padding-bottom: 10vh;
-    overflow: hidden; /* Ngăn phần viền bị mờ tràn ra ngoài khung */
-}
-
-/* Kỹ thuật ::before để tách riêng lớp ảnh và lớp chữ */
-.hero-section::before {
-    content: "";
-    position: absolute;
-    top: -10px; left: -10px; right: -10px; bottom: -10px; /* Mở rộng ảnh ra một chút để viền mờ không bị lộ viền trắng */
-    /* Link ảnh mẫu chất lượng cao */
-    background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2000&auto=format&fit=crop'); 
-    background-size: cover;
-    background-position: center;
-    filter: blur(5px); /* Chỉnh độ mờ tại đây (số càng to càng mờ) */
-    z-index: -1; /* Đẩy lớp ảnh này lùi về phía sau cùng */
 }
 
 /* --- Giao diện Lightbox --- */
